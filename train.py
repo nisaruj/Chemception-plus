@@ -1,8 +1,10 @@
+import datetime
 import glob
 import matplotlib.pyplot as plt
 import numpy as np
 import os.path
 import pickle
+import tensorflow as tf
 
 from classification_models.tfkeras import Classifiers
 from tensorflow.keras import optimizers
@@ -34,12 +36,24 @@ def train_model(model_name, X_train, y_train, X_test, y_test, input_shape=(80, 8
     print(model_name, ':', 'compiling /w RMSprop')
     model.compile(optimizer=RMSprop, loss='binary_crossentropy', metrics=['accuracy'])
     print(model_name, ':', 'fitting /w RMSprop')
-    model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=batch_size, epochs=epochs)
+    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+    model.fit(X_train, y_train, 
+              validation_data=(X_test, y_test), 
+              batch_size=batch_size, 
+              epochs=epochs, 
+              callbacks=[tensorboard_callback])
 
     print(model_name, ':', 'compiling /w SGD')
     model.compile(optimizer=SGD, loss='binary_crossentropy', metrics=['accuracy'])
     print(model_name, ':', 'fitting /w SGD')
-    model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=batch_size, epochs=epochs)
+    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+    model.fit(X_train, y_train, 
+              validation_data=(X_test, y_test), 
+              batch_size=batch_size, 
+              epochs=epochs, 
+              callbacks=[tensorboard_callback])
 
     model.save(model_path)
     print(model_name, ':', 'saved')
