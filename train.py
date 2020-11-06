@@ -29,7 +29,7 @@ def train_model(model_name, X_train, y_train, X_test, y_test, input_shape=(80, 8
     model_path = 'models/' + model_name + '.h5'
     print(model_name, ':', 'model at path', model_path)
     
-    model = get_model(model_name, input_shape)
+    model = get_model(model_name, input_shape=input_shape)
 
     print(model_name, ':', 'compiling /w RMSprop')
     model.compile(optimizer=RMSprop, loss='binary_crossentropy', metrics=['accuracy'])
@@ -92,5 +92,5 @@ if resize_method == 'duplicate':
     print(X_train_new.shape, X_test_new.shape)
 
 model_name = 'inceptionresnetv2'
-model = train_model(model_name, X_train_new, y_train, X_test_new, y_test, input_shape=X_train_new.shape[1:], batch_size=X_train.shape[0], epochs=1)
+model = train_model(model_name, X_train_new, y_train, X_test_new, y_test, input_shape=tuple(list(X_train_new.shape[1:])), batch_size=32, epochs=50)
 benchmark(model, filename='results/' + model_name + '.pickle', save=True)
