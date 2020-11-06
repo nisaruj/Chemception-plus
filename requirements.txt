@@ -1,5 +1,5 @@
 numpy
 matplotlib
-tensorflow
+tensorflow h5py<3.0.0
 scikit-learn
 image-classifiers
