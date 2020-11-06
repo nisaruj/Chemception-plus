@@ -92,5 +92,5 @@ if resize_method == 'duplicate':
     print(X_train_new.shape, X_test_new.shape)
 
 model_name = 'inceptionresnetv2'
-model = train_model(model_name, X_train_new, y_train, X_test_new, y_test, input_shape=tuple(list(X_train_new.shape[1:])), batch_size=32, epochs=50)
+model = train_model(model_name, X_train_new, y_train, X_test_new, y_test, input_shape=(80, 80, 3), batch_size=32, epochs=50)
 benchmark(model, filename='results/' + model_name + '.pickle', save=True)
