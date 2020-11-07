@@ -47,8 +47,6 @@ def train_model(model_name, X_train, y_train, X_test, y_test, input_shape=(80, 8
     print(model_name, ':', 'compiling /w SGD')
     model.compile(optimizer=SGD, loss='binary_crossentropy', metrics=['accuracy'])
     print(model_name, ':', 'fitting /w SGD')
-    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
     model.fit(X_train, y_train, 
               validation_data=(X_test, y_test), 
               batch_size=batch_size, 
