@@ -1,7 +1,0 @@
-README.md
-setup.py
-CPCU_Chemplus_PNA.egg-info/PKG-INFO
-CPCU_Chemplus_PNA.egg-info/SOURCES.txt
-CPCU_Chemplus_PNA.egg-info/dependency_links.txt
-CPCU_Chemplus_PNA.egg-info/top_level.txt
-Chemplus/__init__.py
